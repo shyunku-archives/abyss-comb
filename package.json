@@ -1,0 +1,23 @@
+{
+  "name": "abyss-comb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "demon": "nodemon --ignore ./resources"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "0.21.1",
+    "copy-dir": "1.3.0",
+    "ejs": "3.1.6",
+    "express": "4.17.1",
+    "progress": "2.0.3",
+    "progress-extract": "1.0.2",
+    "public-ip": "4.0.4",
+    "rimraf": "3.0.2"
+  }
+}

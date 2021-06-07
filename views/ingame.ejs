@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>칼바람 조합운</title>
+        <link rel="stylesheet" href="css/ingame.css";
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    </head>
+    <body>
+        <div class="top">
+            <input id="sid" placeholder="소환사명을 입력하세요..." spellcheck="false">
+        </div>
+        <div class="content">
+            <div class="my-info">
+                <div class="my-profile-image">
+                    <img src="dragonTrails/<%= dataDragonVersion %>/profileicon/<%= profileIconId %>.png">
+                </div>
+                <div class="info-summary">
+                    <div class="summoner-name"><%= summonerName %></div>
+                    <div class="properties">
+                        <div class="property">
+                            <div class="key">레벨</div>
+                            <div class="value"><%= summonerLevel %></div>
+                        </div>
+                        <div class="property">
+                            <div class="key">티어</div>
+                            <div class="value">Diamond IV</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="game-info">
+                <div class="game-summary">
+                    <div class="map-label"><%= getMapType.MapLabel %></div>
+                    <div class="map-name"><%= getMapType.MapName %></div>
+                </div>
+                <div class="team-info">
+                    <div class="my-team team">
+                        <% for(let participant of gameData.gamers['my_team']){ %>
+                            <div class="participant-info">
+                                <div class="participant-champion-img">
+                                    <img src="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg">
+                                </div>
+                                <div class="participant-spells">
+                                    <div class="spell">
+                                        <img src="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg">
+                                    </div>
+                                    <div class="spell">
+                                        <img src="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg">
+                                    </div>
+                                </div>
+                                <div class="participant-summoner-name"><%= participant.summonerName %></div>
+                            </div>
+                        <% } %>
+                    </div>
+                    <div class="opp-team team">
+                        <% for(let participant of gameData.gamers['opp_team']){ %>
+                            <div class="participant-info">
+                                <div class="participant-champion-img">
+                                    <img src="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg">
+                                </div>
+                                <div class="participant-spells">
+                                    <div class="spell">
+                                        <img src="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg">
+                                    </div>
+                                    <div class="spell">
+                                        <img src="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg">
+                                    </div>
+                                </div>
+                                <div class="participant-summoner-name"><%= participant.summonerName %></div>
+                            </div>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>
+    </script>
+</html>

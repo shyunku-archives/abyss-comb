@@ -1,0 +1,146 @@
+html, body{
+    margin: 0;
+    padding: 0;
+    background-color: #222;
+
+    display: flex;
+    flex-direction: column;
+}
+.top{
+    display: flex;
+    position: relative;
+    justify-content: center;
+    padding: 15px 0;
+    background-color: #151515;
+    box-shadow: 0 3px 5px 1px black;
+}
+input{
+    transition: 0.5s ease;
+    background: none;
+    border: none;
+    color: white;
+}
+input:focus{
+    outline: none;
+}
+#sid{
+    font-size: 15px;
+    border-bottom: 2px solid transparent;
+    padding: 3px 8px;
+    width: 400px;
+    border-bottom: 2px solid rgb(58, 58, 58);
+}
+#sid:focus{
+    transform: scale(1.2);
+    border-bottom: 2px solid rgb(153, 153, 153);
+}
+img{
+    margin: 0;
+    padding: 0;
+}
+.content{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 30px;
+    padding: 0 30px;
+    box-sizing: border-box;
+}
+.my-profile-image{
+    background-color: rgb(197, 141, 0);
+    padding: 5px;
+    line-height: 0;
+}
+.my-profile-image img{
+    width: 150px;
+    height: 150px;
+}
+.my-info{
+    display: flex;
+    margin-bottom: 15px;
+}
+.info-summary{
+    display: flex;
+    flex-direction: column;
+    margin-left: 15px;
+}
+.summoner-name{
+    color: white;
+    font-weight: bold;
+    font-size: 30px;
+}
+.properties{
+    margin-top: 5px;
+}
+.property{
+    display: flex;
+    margin-bottom: 3px;
+}
+.property > *{
+    padding: 3px 5px;
+    font-size: 15px;
+}
+.property .key{
+    background-color: rgb(0, 138, 181);
+}
+.property .value{
+    background-color: rgb(255, 255, 255);
+}
+.game-info{
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid white;
+}
+.team-info{
+    display: flex;
+}
+.team{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+.participant-info{
+    display: flex;
+    padding: 5px;
+    box-sizing: border-box;
+}
+.participant-summoner-name{
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+}
+.participant-champion-img{
+    line-height: 0;
+    padding: 5px;
+}
+.participant-champion-img img{
+    width: 80px;
+    height: 80px;
+}
+.participant-spells .spell{
+    line-height: 0;
+    padding: 5px;
+}
+.participant-spells .spell img{
+    width: 35px;
+    height: 35px;
+}
+.my-team .participant-info{
+    background-color: rgb(0, 34, 70);
+}
+.opp-team .participant-info{
+    flex-direction: row-reverse;
+    background-color: rgb(70, 22, 0);
+}
+.game-summary{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin: 10px 0;
+}
+.game-summary .map-label{
+    font-weight: bold;
+}
