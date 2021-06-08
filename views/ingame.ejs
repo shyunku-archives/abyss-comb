@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>칼바람 조합운</title>
-        <link rel="stylesheet" href="css/ingame.css";
+        <link rel="stylesheet" href="css/ingame.css">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </head>
     <body>
@@ -12,7 +12,7 @@
         <div class="content">
             <div class="my-info">
                 <div class="my-profile-image">
-                    <img src="dragonTrails/<%= dataDragonVersion %>/profileicon/<%= profileIconId %>.png">
+                    <img src="/image/profileIcon/<%= profileIconId %>">
                 </div>
                 <div class="info-summary">
                     <div class="summoner-name"><%= summonerName %></div>
@@ -22,8 +22,12 @@
                             <div class="value"><%= summonerLevel %></div>
                         </div>
                         <div class="property">
+                            <div class="key">소환사 ID</div>
+                            <div class="value"><%= summonerId %></div>
+                        </div>
+                        <div class="property">
                             <div class="key">티어</div>
-                            <div class="value">Diamond IV</div>
+                            <div class="value">?</div>
                         </div>
                     </div>
                 </div>
@@ -38,17 +42,19 @@
                         <% for(let participant of gameData.gamers['my_team']){ %>
                             <div class="participant-info">
                                 <div class="participant-champion-img">
-                                    <img src="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg">
+                                    <img src="/image/champion/<%= participant.championId %>">
                                 </div>
                                 <div class="participant-spells">
                                     <div class="spell">
-                                        <img src="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg">
+                                        <img src="/image/spell/<%= participant.spell1Id %>">
                                     </div>
                                     <div class="spell">
-                                        <img src="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg">
+                                        <img src="/image/spell/<%= participant.spell2Id %>">
                                     </div>
                                 </div>
-                                <div class="participant-summoner-name"><%= participant.summonerName %></div>
+                                <div class="participant-summary">
+                                    <div class="participant-summoner-name"><%= participant.summonerName %></div>
+                                </div>
                             </div>
                         <% } %>
                     </div>
@@ -56,24 +62,42 @@
                         <% for(let participant of gameData.gamers['opp_team']){ %>
                             <div class="participant-info">
                                 <div class="participant-champion-img">
-                                    <img src="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg">
+                                    <img src="/image/champion/<%= participant.championId %>">
                                 </div>
                                 <div class="participant-spells">
                                     <div class="spell">
-                                        <img src="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg">
+                                        <img src="/image/spell/<%= participant.spell1Id %>">
                                     </div>
                                     <div class="spell">
-                                        <img src="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg">
+                                        <img src="/image/spell/<%= participant.spell2Id %>">
                                     </div>
                                 </div>
-                                <div class="participant-summoner-name"><%= participant.summonerName %></div>
+                                <div class="participant-summary">
+                                    <div class="participant-summoner-name"><%= participant.summonerName %></div>
+                                </div>
                             </div>
                         <% } %>
                     </div>
                 </div>
             </div>
+            <div class="calculate-info">
+                <div class="team-win-prob">
+                    <div class="my-team-win-prob prob" style="width: <%= score.prob * 100 %>%"><%= parseInt(score.prob * 100) %>%</div>
+                    <div class="opp-team-win-prob prob" style="width: <%= (1 - score.prob) * 100 %>%"><%= parseInt((1 - score.prob) * 100) %>%</div>
+                </div>
+            </div>
         </div>
     </body>
     <script>
+        $('#sid').on('keydown', (e) => {
+            if(e.keyCode === 13){
+                location.href = `/judge?name=${e.target.value}`;
+            }
+        });
+
+        $('.participant-summoner-name').on('click', function() {
+            let nickname = $(this).html();
+            location.href = `/judge?name=${nickname}`;
+        });
     </script>
 </html>

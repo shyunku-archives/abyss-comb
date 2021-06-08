@@ -33,6 +33,12 @@ module.exports = {
             resolve(false, err);
         });
     },
+    riotSync: function(path){
+        let fullUrl = this.url(path);
+        let newUrl = insertParam(fullUrl, 'api_key', apiKey);
+
+        return axios.get(newUrl);
+    },
     axios: function(url, resolve){
         axios.get(url).then(data => {
             resolve(true, data.data);
@@ -44,6 +50,10 @@ module.exports = {
         func();
         setInterval(func, delay);
     },
+    readJson: function(path){
+        let data = fs.readFileSync(path).toString();
+        return JSON.parse(data);
+    },
     getGameType: function(type){
         switch(type){
             case 450:
@@ -54,7 +64,7 @@ module.exports = {
             case 420:
                 MapLabel = "솔로 랭크";
                 MapType = "summoners-rift";
-                MapName = "솔로 랭크";
+                MapName = "랭크(소환사의 협곡)";
                 break;
             case 430:
                 MapLabel = "일반";
@@ -64,7 +74,7 @@ module.exports = {
             case 440:
                 MapLabel = "자유 랭크";
                 MapType = "summoners-rift";
-                MapName = "자유 랭크";
+                MapName = "랭크(소환사의 협곡)";
                 break;
             case 830:
                 MapLabel = "입문 봇전";
@@ -102,8 +112,8 @@ module.exports = {
     getDragonTrailTgz: async function(dataDragonVersion){
         const downloadPath = path.resolve(__dirname, 'resources', 'temp', 'dtt', `dragonTrails-${dataDragonVersion}.tgz`);
         const decompressPath = path.resolve(__dirname, 'resources', 'temp', 'dt_raw', `${dataDragonVersion}`);
-        const finalPath = path.resolve(__dirname, 'resources', 'dragonTrails', `${dataDragonVersion}`);
         const copyPath = path.resolve(decompressPath, `${dataDragonVersion}`, 'img');
+        const finalPath = path.resolve(__dirname, 'resources', 'dragonTrails');
 
         if(fs.existsSync(finalPath)){
             console.log("DragonTrails data already exists, all process skipped.");
@@ -165,6 +175,43 @@ module.exports = {
         writer.on('finish', () => {
             console.log("DragonTrails tgz download finished.");
             afterFinish();
+        });
+
+        writer.on('error', (e) => {
+            console.error(e);
+        });
+    },
+    downloadImage: async function(url, dest, label = '', progress = false){
+        const {data, headers} = await axios({
+            url: url,
+            method: 'GET',
+            responseType: 'stream'
+        });
+        const writer = fs.createWriteStream(dest);
+        const totalLength = headers['content-length'];
+
+        if(progress){
+            const progressBar = new ProgressBar(`-> downloading image data [:bar] :percent :etas`, {
+                width: 80,
+                complete: '=',
+                incomplete: ' ',
+                renderThrottle: 1,
+                total: parseInt(totalLength)
+            });
+
+            data.on('data', (chunk) => {
+                progressBar.tick(chunk.length);
+            });
+        }
+        data.pipe(writer);
+
+        writer.on('finish', () => {
+            if(label.length > 0)
+                console.log(`image: ${label} download finished.`);
+        });
+
+        writer.on('error', (e) => {
+            console.error(e);
         });
     }
 }
