@@ -188,7 +188,7 @@ module.exports = {
     }
 
     if (!fs.existsSync(downloadDestPath)) {
-      fs.mkdirSync(downloadDestPath, true);
+      fs.mkdirSync(downloadDestPath, { recursive: true });
     }
 
     const { data, headers } = await axios({
